@@ -1,0 +1,22 @@
+.filesCont{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.fileContainerAcc{
+    width: 400px;
+}
+.fileContainerAcc iframe{
+    width: 100%;
+    object-fit: contain;
+    overflow: hidden;
+}
+.fileContainerAcc iframe img{
+    width: 100%;
+    display: none;
+    object-fit: contain;
+    overflow: hidden;
+}

@@ -1,0 +1,27 @@
+ 
+.FolderPickerCont {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+  }
+   
+  .folderCont {
+    cursor: pointer;
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    width: 200px;
+  } 
+   a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+   
+  .folderCont:hover {
+    background-color: #f0f0f0;
+  }
