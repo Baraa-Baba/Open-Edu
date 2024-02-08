@@ -7,7 +7,9 @@ export default function FolderPicker({subjects}) {
     <div className='FolderPickerCont'> 
          {subjects[0] ? subjects?.map(function (subject){
        return  <FolderCard subject={subject} /> 
-}) :null}
+}) :
+<div>there are no files avialble <a href="/form"><button>Contribute</button></a>  </div>
+ }
 
     </div>
   )

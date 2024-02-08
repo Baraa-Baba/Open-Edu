@@ -1,10 +1,6 @@
 import React, { useEffect } from 'react'
 import '../css/Popup.css'
-export default function Popup({isFileUploaded,fileLength}) {
-    useEffect(()=>{
-        alert(fileLength)
-        alert(isFileUploaded)
-    },[fileLength,isFileUploaded])
+export default function Popup({isFileUploaded,fileLength}) { 
   return (
     <div className='PopupCont'> 
         {isFileUploaded>= fileLength ?
@@ -28,18 +24,22 @@ export default function Popup({isFileUploaded,fileLength}) {
             <p>Please wait up to 48hrs for your contribution to appear.</p>
         </div>
         <div class = "othershit">
-            <button>Contribute</button>
-            <button>Learn</button>
+          <a href="/form"><button>Contribute</button></a>
+          <a href="/"><button>Learn</button></a>
         </div>
     </div>
         </div>: 
+        <div className='loadingCont'>
  <div class="lds-ellipsis">
     <div></div>
     <div></div>
     <div></div>
     <div></div>
               </div>
-        
+              <div class = "thanks">
+            <h2> uploading documents please wait</h2> 
+        </div>
+        </div>
         }
     </div>
   )

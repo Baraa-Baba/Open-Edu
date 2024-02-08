@@ -37,15 +37,13 @@ export default function Form() {
   const [isFileUploaded,setisFileUploaded]=useState(0)
   const [fileLength,setFileLength]=useState(0)
   function handleApplicationTypes(value){  
-    setTimeout(()=>{
-      alert(value[0]?.name)
+    setTimeout(()=>{ 
       setApplicationTypes(value)
     },1000)
   }
-  useEffect(()=>{
-    alert('cmon craclin')
+  useEffect(()=>{ 
 console.log(ApplicationTypes)
-  },[ApplicationTypes])
+  },[ApplicationTypes?.length])
   function handleSecChange(selectedSecs){  
     handleSubjectChange(selectedSubject) 
   const allSections = [{name:'GS',subjects:GSSubjectOptions},{name:'ES',subjects:ESSubjectOptions},{name:'LS',subjects:LSSubjectOptions},{name:'LH',subjects:LHSubjectOptions}]
@@ -147,7 +145,7 @@ console.log(ApplicationTypes)
     setFileLength(formFileElment.files.length)
     if(formFileElment.files.length==1){  
 
-    uploadFile(formFileElment.files[0],singleFileData.fileID,singleFileData) 
+    uploadFile(formFileElment.files[0],singleFileData.fileID,singleFileData,singleFileData?.fileName) 
     }else{
       for(let i=0;i<formFileElment.files.length;i++){ 
         let otherUniqueID = uuidv4();  
@@ -162,6 +160,7 @@ console.log(ApplicationTypes)
     try {   
       let fileDataTMP =fileData
       fileDataTMP.fileURL=fileURL 
+      console.log(fileDataTMP)
       const docRef = await setDoc(doc(db, "fileData",fileDataTMP.fileID), 
       fileDataTMP
       );     
@@ -264,7 +263,15 @@ const uploadFile = (file,fileID,singleFileData,fileName) => {
       })
       console.log(selectedUnitsData)
       setAvliableLessons(convertToOptions(Array.from(lessons))) 
-    }   
+    }  
+    useEffect(()=>{
+      setTimeout(()=>{
+        let elm =document.querySelector('#subjectMutli')
+        let input=document.querySelector('#subjectMutli input')
+        input.style.position='absolute' 
+        
+      },2000)
+    },[]) 
     return (
 
     <div className='formCont'> 

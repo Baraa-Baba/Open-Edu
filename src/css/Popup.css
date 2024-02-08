@@ -10,9 +10,14 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.5); /* Black overlay with 50% opacity */
   }
-  
+  #second svg{
+    fill:#4070F4
+  }
   .PopupCont > div {
     background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 20px;
     height: 600px;
     width: 500px;
@@ -42,7 +47,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #27c857;
+      background-color: #4070F4;
       clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
       animation: fillCircle .7s forwards;
   }
@@ -75,10 +80,17 @@
       align-items: center;
       justify-content: center;
   }
+  .circle{
+    margin-top: 0 !important;
+  }
+  .loadingCont{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
   .confirm {
       background-color: #ffffff;
-      width: 90%;
-      height: 60%;
+      width: 90%; 
       display: grid;
       grid-template-columns: 1fr; 
       justify-content: center;
@@ -89,7 +101,7 @@
       text-align: center;
   }
   .thanks h2 {
-      color: #27c857;
+      color: #4070F4;
       font-weight: 900;
       font-size: 28px;
       padding: 5px;
@@ -103,20 +115,22 @@
       flex-direction: row;
       flex-wrap: wrap;
       justify-content: center;
+      flex-grow: 1;
       gap: 20px;
   }
-  .othershit button {
-      width: 120px;
-      height: 50px;
+  .othershit button { 
+      padding: 20px; 
       border-radius: 10px;
       font-weight: bold;
       font-size: 18px;
-      background-color: #27c857;
+      height: 100%;
+      background-color: #4070F4;
       color: #ffffff;
       border: none;
+      cursor: pointer;
   }
   .othershit button:hover{
-      background-color: #006d18;
+      background-color: #1442c2;
       transition: 0.4s ease-in-out;
   }
   

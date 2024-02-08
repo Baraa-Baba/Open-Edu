@@ -190,7 +190,16 @@ const router = createBrowserRouter([
   ...genrateTypesRoute(ESSubjectOptions,'ES'),
   ...genrateTypesRoute(LSSubjectOptions,'LS'),
   ...genrateTypesRoute(LHSubjectOptions,'LH'),
-  ...genrateTypesRoute(GSSubjectOptions,'GS')
+  ...genrateTypesRoute(GSSubjectOptions,'GS'),
+
+  {
+    path: "/GS",
+    element: <FolderPicker subjects={GSSubjectOptions} /> ,
+  },  
+{
+  path:'/*',
+  element: <div>reRoute</div> , 
+}
 ]);  
 console.log(GSSubjectOptions)
 ReactDOM.createRoot(document.getElementById("root")).render( 
