@@ -7,7 +7,7 @@ export default function Navbar() {
             <ul class="navbar-list">
                 <li class="navbar-item"><a href="/about-us">About</a></li>
                 <li class="navbar-item"><a href="/contact">Contact</a></li>
-                <button class="glow-btn"><a href="/form">contribute</a></button>
+                <a href="/form"><button class="glow-btn">contribute</button></a>
             </ul>
     </header> 
   )

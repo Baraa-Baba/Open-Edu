@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import {collection, addDoc, setDoc,doc , getDocs,getDoc } from "firebase/firestore"; 
 import { db } from '../firebase'; 
 import { Link } from 'react-router-dom'
+
+import '../css/FolderPicker.css'
 function App() {
   const [count, setCount] = useState(0)
   useEffect(()=>{
@@ -15,11 +17,30 @@ function App() {
   console.log(getMarker())
   },[])
   return ( 
-      <div>
-          <Link to={'/GS'}>GS</Link>
-          <Link to={'/LS'}>LS</Link>
-          <Link to={'/ES'}>ES</Link>
-          <Link to={'/LH'}>LH</Link>
+      <div className='FolderPickerCont'>
+         <Link to={'/GS'} >
+        <div className='folderCont'>
+          GS
+        </div>
+      </Link>
+
+      <Link to={'/LS'} >
+        <div className='folderCont'>
+          LS
+        </div>
+      </Link>
+
+      <Link to={'/ES'} >
+        <div className='folderCont'>
+          ES
+        </div>
+      </Link>
+
+      <Link to={'/LH'} >
+        <div className='folderCont'>
+          LH
+        </div>
+      </Link>
           <style jsx>{`
             footer{
               position:fixed;

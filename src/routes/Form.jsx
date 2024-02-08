@@ -36,13 +36,14 @@ export default function Form() {
   const [IsSubmited,setIsSubmited]=useState(false)
   const [isFileUploaded,setisFileUploaded]=useState(0)
   const [fileLength,setFileLength]=useState(0)
-  function handleApplicationTypes(value){ 
-    alert('d')
+  function handleApplicationTypes(value){  
     setTimeout(()=>{
+      alert(value[0]?.name)
       setApplicationTypes(value)
     },1000)
   }
   useEffect(()=>{
+    alert('cmon craclin')
 console.log(ApplicationTypes)
   },[ApplicationTypes])
   function handleSecChange(selectedSecs){  
@@ -127,8 +128,7 @@ console.log(ApplicationTypes)
     if(!document.getElementById('permissionCheck').checked||!authorsName||!selectedSubject?.name||!slectedSecsOptions[0]?.name||
      !isUnitFuffled ||!isLessonFuffled||!ApplicationTypes[0]?.name) { 
       setisClickedOnSubmit(true) 
-      console.log(!authorsName.trim(),ApplicationTypes[0]?.name)
-      alert('returned')
+      console.log(!authorsName.trim(),ApplicationTypes[0]?.name) 
       return
       }
     let formFileElment= document.getElementById('form_file')
@@ -149,12 +149,12 @@ console.log(ApplicationTypes)
 
     uploadFile(formFileElment.files[0],singleFileData.fileID,singleFileData) 
     }else{
-      for(let i=0;i<formFileElment.files.length;i++){
+      for(let i=0;i<formFileElment.files.length;i++){ 
         let otherUniqueID = uuidv4();  
         let mutliFileData=singleFileData
         mutliFileData.fileID=otherUniqueID 
         mutliFileData.fileName= formFileElment.files[i].name  
-        uploadFile(formFileElment.files[i],otherUniqueID,mutliFileData) 
+        uploadFile(formFileElment.files[i],otherUniqueID,mutliFileData,formFileElment.files[i].name ) 
       }
   } 
 }
@@ -177,7 +177,7 @@ console.log(ApplicationTypes)
       return []
     }
 } 
-const uploadFile = (file,fileID,singleFileData) => { 
+const uploadFile = (file,fileID,singleFileData,fileName) => { 
   if (!file) return;  
   setIsSubmited(true)
   const sotrageRef = ref(storage, `files/${fileID}/${singleFileData?.fileName}`);
@@ -195,6 +195,7 @@ const uploadFile = (file,fileID,singleFileData) => {
          console.log("File available at", downloadURL); 
           let singleFileDataTmp = singleFileData
           singleFileDataTmp.fileID = fileID
+          singleFileDataTmp.fileName = fileName
          handleSingleFileUpload(singleFileDataTmp,downloadURL) 
        }); 
      }

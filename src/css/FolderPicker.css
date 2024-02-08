@@ -8,8 +8,11 @@
     gap: 20px;
     padding: 20px;
   }
-   
+   .optionContainer .option{
+    text-transform: capitalize;
+   }
   .folderCont {
+    text-transform: capitalize;
     cursor: pointer;
     border: 1px solid #ddd;
     padding: 10px;
