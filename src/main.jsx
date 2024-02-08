@@ -1,10 +1,11 @@
 import React from "react";  
 import ReactDOM from "react-dom/client"; 
 import {
-  createBrowserRouter,
-  RouterProvider,
+  BrowserRouter as Router,
+  Routes,
   Route,
-} from "react-router-dom"; 
+  Link,
+} from "react-router-dom";
 import Navbar from './components/Navbar' 
 import { UserAuthContextProvider } from "./context/AuthContext";  
 import AboutUs from "./routes/AboutUs";
@@ -131,14 +132,14 @@ const genrateTypesRoute = (secSubject,sec) => {
   );
   return typeRoutes
 };
-const router = createBrowserRouter([
+ let routesArr= [
   {
     path: "/",
     element: <App />, 
     errorElement:<ErrorPage />,
   },
   {
-    path: "/about-us",
+    path: "/aboutUs",
     element: <AboutUs /> ,
   }, 
   {
@@ -200,12 +201,22 @@ const router = createBrowserRouter([
   path:'/*',
   element: <div>reRoute</div> , 
 }
-]);  
+]
 console.log(GSSubjectOptions)
 ReactDOM.createRoot(document.getElementById("root")).render( 
     <UserAuthContextProvider>  
-      <Navbar />
-    <RouterProvider router={router} /> 
+      <Router>
+    <Navbar />
+    <Routes>
+    {routesArr?.map(function (routeSingle, index){
+       return   <Route
+       exact
+       path={routeSingle?.path}
+       element={routeSingle?.element}
+   ></Route>
+})}
+</Routes>
     <Footer  /> 
+      </Router> 
     </UserAuthContextProvider> 
 );
