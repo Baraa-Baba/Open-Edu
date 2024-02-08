@@ -1,12 +1,12 @@
- 
 .FolderPickerCont {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     width: 100%;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 18px;
     padding: 20px;
+    height: calc(99vh - 100px);
   }
    .optionContainer .option{
     text-transform: capitalize;
@@ -17,7 +17,11 @@
     border: 1px solid #ddd;
     padding: 10px;
     text-align: center;
-    width: 200px;
+    width: 300px;
+    max-width: 80vw;
+    background-color: #4070F4;
+    border-radius: 12px;
+    color: white;
   } 
    a {
     text-decoration: none;
@@ -26,5 +30,5 @@
   }
    
   .folderCont:hover {
-    background-color: #f0f0f0;
+    background-color: #1a49cc;
   }

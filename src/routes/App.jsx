@@ -20,25 +20,25 @@ function App() {
       <div className='FolderPickerCont'>
          <Link to={'/GS'} >
         <div className='folderCont'>
-          GS
+          General Science
         </div>
       </Link>
 
       <Link to={'/LS'} >
         <div className='folderCont'>
-          LS
+          Life Science
         </div>
       </Link>
 
       <Link to={'/ES'} >
         <div className='folderCont'>
-          ES
+          Economy Sociology
         </div>
       </Link>
 
       <Link to={'/LH'} >
         <div className='folderCont'>
-          LH
+        Literature Humanities
         </div>
       </Link>
           <style jsx>{`

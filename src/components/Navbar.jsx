@@ -6,8 +6,8 @@ export default function Navbar() {
         <div id = "title"><h1 id = "Main-title"><a href="/">FEKRA</a></h1></div>
             <ul class="navbar-list">
                 <li class="navbar-item"><a href="/about-us">About</a></li>
-                <li class="navbar-item"><a href="/contact">Contact</a></li>
-                <a href="/form"><button class="glow-btn">contribute</button></a>
+                <li class="navbar-item"><a href="mailto:hcr8361@gmail.com">Contact</a></li>
+                <li class="navbar-item"><a href="/form">Contribute</a></li>
             </ul>
     </header> 
   )

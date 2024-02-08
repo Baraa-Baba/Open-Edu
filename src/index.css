@@ -5,7 +5,7 @@
     box-sizing:border-box;
     margin:0;
     padding:0;
-    /* transition: all 0.4s ease; */
+    transition: all 0.4s ease;
     color: var(--main);
 
 }
@@ -25,7 +25,6 @@ header {
     padding: 7px;
     display: flex;
     justify-content: space-between;
-    z-index: 10000;
     align-items: center;
     background-color: var(--nav-color);
   }
@@ -39,8 +38,11 @@ header {
     font-weight: 800;  
     display: inline;
 }
+#Main-title a:hover {
+    color: var(--main);
+}
 #Main-title a{
-    color: white !important;
+    color: white;
 }
 .navbar-list{
     list-style: none;
@@ -136,6 +138,9 @@ footer{
     background: var(--nav-color);
     text-align: center;
     margin-top: 20px;
+    font-size: 15px;
+    position: relative;
+    bottom: 0;
 }
 .list-container{
     display: grid;
@@ -162,25 +167,7 @@ footer{
     max-width: 100vw;
     word-break: break-all;
 }
-.glow-btn {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    text-align: center;
-    cursor: pointer;
-    background-color: #FFC0CB; /* Pink */
-    box-shadow: 0 0 4px #FFC0CB, 0 0 10px #FF69B4, 0 0 20px #800080; /* Pink, Purple, Yellow */
-    text-decoration: none;
-    border-radius: 5px;
-    margin-left: 30px;
-    margin-right: 0;
-    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  } 
-  .glow-btn:hover {
-    scale: 1 !important;
-    background-color: hsl(350, 100%, 70%); /* Pink */
-    box-shadow: 0 0 10px #FFC0CB, 0 0 20px #FF69B4, 0 0 30px #800080; /* Pink, Purple, Yellow */
-  }
+
 @media (max-width:400px) {
     header{
         flex-direction:column;

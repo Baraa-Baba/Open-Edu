@@ -37,13 +37,15 @@ export default function Form() {
   const [isFileUploaded,setisFileUploaded]=useState(0)
   const [fileLength,setFileLength]=useState(0)
   function handleApplicationTypes(value){  
-    setTimeout(()=>{ 
+    setTimeout(()=>{
+      alert(value[0]?.name)
       setApplicationTypes(value)
     },1000)
   }
-  useEffect(()=>{ 
+  useEffect(()=>{
+    alert('cmon craclin')
 console.log(ApplicationTypes)
-  },[ApplicationTypes?.length])
+  },[ApplicationTypes])
   function handleSecChange(selectedSecs){  
     handleSubjectChange(selectedSubject) 
   const allSections = [{name:'GS',subjects:GSSubjectOptions},{name:'ES',subjects:ESSubjectOptions},{name:'LS',subjects:LSSubjectOptions},{name:'LH',subjects:LHSubjectOptions}]
@@ -145,7 +147,7 @@ console.log(ApplicationTypes)
     setFileLength(formFileElment.files.length)
     if(formFileElment.files.length==1){  
 
-    uploadFile(formFileElment.files[0],singleFileData.fileID,singleFileData,singleFileData?.fileName) 
+    uploadFile(formFileElment.files[0],singleFileData.fileID,singleFileData) 
     }else{
       for(let i=0;i<formFileElment.files.length;i++){ 
         let otherUniqueID = uuidv4();  
@@ -160,7 +162,6 @@ console.log(ApplicationTypes)
     try {   
       let fileDataTMP =fileData
       fileDataTMP.fileURL=fileURL 
-      console.log(fileDataTMP)
       const docRef = await setDoc(doc(db, "fileData",fileDataTMP.fileID), 
       fileDataTMP
       );     
@@ -263,19 +264,11 @@ const uploadFile = (file,fileID,singleFileData,fileName) => {
       })
       console.log(selectedUnitsData)
       setAvliableLessons(convertToOptions(Array.from(lessons))) 
-    }  
-    useEffect(()=>{
-      setTimeout(()=>{
-        let elm =document.querySelector('#subjectMutli')
-        let input=document.querySelector('#subjectMutli input')
-        input.style.position='absolute' 
-        
-      },2000)
-    },[]) 
+    }   
     return (
 
     <div className='formCont'> 
-    <p className='formSubTitle'>basic info</p>
+    <p className='formSubTitle'>Basic info</p>
 
  
     <label htmlFor='authorsName'  className='formLabel'>Author's Name* {isClickedOnSubmit && <RequiredWarning requiredValue={authorsName} />}  </label>
@@ -289,7 +282,7 @@ const uploadFile = (file,fileID,singleFileData,fileName) => {
         <input onChange={(e)=>e.target.value && setisShowReqried(false)} type="checkbox" name="" required id="permissionCheck" />  {isShowReqried && <span className='warningText'>you have to have permission from the author</span>}
     </div>
 
-    <p className='formSubTitle'>file tags</p>
+    <p className='formSubTitle'>File tags</p>
 
     <label htmlFor='sections' className='formLabel'>Sections* {isClickedOnSubmit && 
       <span style={{color:'red'}}> 
@@ -344,7 +337,7 @@ const uploadFile = (file,fileID,singleFileData,fileName) => {
     <Multiselect showArrow onRemove={(value) => handleApplicationTypes(value)}  onSelect={(value) => handleApplicationTypes(value)}
      className='mutilSelect' avoidHighlightFirstOption options={typeApplcation}  placeholder='Types' displayValue="name" showCheckbox={true} />
 
-    <p className='formSubTitle'>attach file*
+    <p className='formSubTitle'>Attach file*
     {isClickedOnSubmit &&
       <span style={{color:'red'}}> 
       {(!Files.length)?'(this field is required)':null}
