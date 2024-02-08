@@ -3,8 +3,16 @@ import {collection, addDoc, setDoc,doc , getDocs,getDoc } from "firebase/firesto
 import { db } from '../firebase'; 
 import { Link } from 'react-router-dom'
 import PendingCard from '../components/PendingCard';
+import { useUserAuth } from '../context/AuthContext';
 function Admin() { 
+  const { user } = useUserAuth();
     const [PendingFiles,setPendingFiles]=useState([{fileName:'loading...'}])
+    const [showAdmin,setShowAdmin]=useState(false)
+    useEffect(()=>{ 
+      if(user?.phoneNumber!=='+96176032809'||user?.phoneNumber!=='+96171800791'){
+        setShowAdmin(true)
+      }
+    },[user])
   useEffect(()=>{
     let pendingFiles=[]
     async function getMarker(){
@@ -26,9 +34,11 @@ function Admin() {
   return (
     <>
     Admin 
-    {PendingFiles.map(function (pendingFile, index){
+  {showAdmin?  <>
+   {PendingFiles.map(function (pendingFile, index){
        return  <PendingCard fileData={pendingFile} /> 
-})}
+})} 
+    </>:<>loading...</>}
 
     </>
   )

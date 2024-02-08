@@ -8,7 +8,7 @@ export default function AboutUs() {
     <h1 class = "title">FEKRA Open Learning</h1>
     <div class = "info">
         <div class="logo">
-            <img src="logo.png" class="logo-img" />
+            <img src="/logo.png" class="logo-img" />
         </div>
         <div class = "mission">
             <p class = "product-info">

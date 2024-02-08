@@ -58,13 +58,45 @@
     box-sizing: border-box;
   }
   
+#form_file{
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: white;
+  box-sizing: border-box;
+  cursor: pointer;
+  height: 100px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.7;
+  color: black !important;
+  -webkit-appearance: none;
+  border: 1px solid #ccc;
+    border-radius: 4px;
+  -moz-appearance: none;
+  appearance: none;  
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.file-delete:hover div{
+  color: red !important;
+}
+.optionListContainer{
+  z-index: 100000000 !important;
+}
+#form_file::placeholder{
+display: none;
+}
   .permissionText {
     display: inline-block;
     margin-right: 10px;
   }
   .singleSelect{
-
+    height: 45px;
     padding-right: 0 !important;
+  }
+  .singleSelect > input{
+    z-index: 0 !important;
+    position: absolute !important
   }
   .singleSelect .singleChip{
     background: #0096fb;

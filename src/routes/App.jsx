@@ -20,6 +20,13 @@ function App() {
           <Link to={'/LS'}>LS</Link>
           <Link to={'/ES'}>ES</Link>
           <Link to={'/LH'}>LH</Link>
+          <style jsx>{`
+            footer{
+              position:fixed;
+              width:100%;
+              bottom:0
+            }
+          `}</style>
       </div> 
   )
 }

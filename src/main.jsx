@@ -33,54 +33,102 @@ async function getMarker(){
 }
 getMarker()   
 console.log(AceppetedFiles)
+function genrateSecsRoutes(secsSubject,sec){
+  return secsSubject.map((subject)=>{
+    console.log(subject)
+    if(subject?.units){
+    return { 
+       path: `/${sec}/${subject.name}`,
+       element: <FolderPicker subjects={subject.units} /> ,
+     }
+    }else{
+      return { 
+         path: `/${sec}/${subject.name}`,
+         element: <FolderPicker subjects={Object.values(typeApplcation).map(obj => obj.name)} /> ,
+       }
+    }
+   })
+}
 
-
-const generateUnitRoute = () => {
-  return GSSubjectOptions.flatMap((subject) => {
+const generateUnitRoute = (secsSubject,sec) => {
+  console.log(sec)
+  console.log(secsSubject)
+  return secsSubject.flatMap((subject) => {
     return (
-      subject?.units?.map((unit) => { 
+      subject?.units?.map((unit) => {  
+        if(unit?.lessons){
         return {
-          path: `/GS/${subject.name}/${unit.name}`,
+          path: `/${sec}/${subject.name}/${unit.name}`,
           element: <FolderPicker subjects={unit?.lessons} />,
           
-        };
+        }; 
+      }else{
+        return {
+          path: `/${sec}/${subject.name}/${unit.name}`,
+          element: <FolderPicker subjects={Object.values(typeApplcation).map(obj => obj.name)} />,
+          
+        }; 
+      }
       }) || []
     );
   });
 };
-const genrateLessonRoute = () => {
+const genrateLessonRoute = (secsOptions,sec) => {
   let lessonsRoutes=[]
-   GSSubjectOptions.flatMap((subject) => {
+  secsOptions.flatMap((subject) => {
     return (
       subject?.units?.map((unit) => { 
-        unit?.lessons.map((lesson)=>{   
+        if(unit?.lessons){
+        unit?.lessons?.map((lesson)=>{   
           lessonsRoutes.push( { 
-              path: `/GS/${subject.name}/${unit.name}/${lesson}`,
-              element: <FolderPicker subjects={Object.values(typeApplcation).map(obj => obj.name)} />
+              path: `/${sec}/${subject.name}/${unit.name}/${lesson}`,
+              element: <FolderPicker subjects={Object.values(typeApplcation)?.map(obj => obj.name)} />
             })
         })
+        }
       })
     
     );
   });
   return lessonsRoutes
 };
-const genrateTypesRoute = () => {
+const genrateTypesRoute = (secSubject,sec) => {
   let typeRoutes=[]
-  GSSubjectOptions.flatMap((subject) => {
+  secSubject.flatMap((subject) => {
+    if(subject?.units){
     return (
       subject?.units?.map((unit) => { 
-        unit?.lessons.map((lesson)=>{ 
+        if(unit?.lessons){
+        unit?.lessons.map((lesson)=>{  
           for(let i=0;i<typeApplcation.length;i++){
             typeRoutes.push({
-              path: `/GS/${subject.name}/${unit.name}/${lesson}/${typeApplcation[i].name}`,
+              path: `/${sec}/${subject.name}/${unit.name}/${lesson}/${typeApplcation[i].name}`,
               element:<FilePicker accFiles={AceppetedFiles} />,
             })
           }
         })
-      }) || []
-    );
-  });
+      }else{ 
+          for(let i=0;i<typeApplcation.length;i++){
+            typeRoutes.push({
+              path: `/${sec}/${subject.name}/${unit.name}/${typeApplcation[i].name}`,
+              element:<FilePicker accFiles={AceppetedFiles} />,
+            })
+          } 
+      }
+      })
+    )}
+    else{
+      for(let i=0;i<typeApplcation.length;i++){
+        typeRoutes.push({
+          path: `/${sec}/${subject.name}/${typeApplcation[i].name}`,
+          element:<FilePicker accFiles={AceppetedFiles} />,
+        })
+      }  
+    }
+    
+  
+}
+  );
   return typeRoutes
 };
 const router = createBrowserRouter([
@@ -90,11 +138,11 @@ const router = createBrowserRouter([
     errorElement:<ErrorPage />,
   },
   {
-    path: "about-us/",
+    path: "/about-us",
     element: <AboutUs /> ,
   }, 
   {
-    path: "/Form",
+    path: "/form",
     element: <Form /> ,
   }, 
   {
@@ -111,30 +159,38 @@ const router = createBrowserRouter([
   }, 
   {
     path: "/ES",
-    element: <FolderPicker subjects={GSSubjectOptions} /> ,
+    element: <FolderPicker subjects={ESSubjectOptions} /> ,
   }, 
  
   {
     path: "/LS",
-    element: <FolderPicker subjects={GSSubjectOptions} /> ,
+    element: <FolderPicker subjects={LSSubjectOptions} /> ,
   }, 
   {
     path: "/LH",
-    element: <FolderPicker subjects={GSSubjectOptions} /> ,
+    element: <FolderPicker subjects={LHSubjectOptions} /> ,
   }, 
   {
     path: "/GS",
     element: <FolderPicker subjects={GSSubjectOptions} /> ,
-  }, 
-  ...GSSubjectOptions.map((subjects)=>{
-   return {
-      path: `/GS/${subjects.name}`,
-      element: <FolderPicker subjects={subjects.units} /> ,
-    }
-  }), 
-  ...generateUnitRoute(),
-  ...genrateLessonRoute(),
-  ...genrateTypesRoute()
+  },  
+
+   ...genrateSecsRoutes(LSSubjectOptions,'LS'),
+   ...genrateSecsRoutes(ESSubjectOptions,'ES'),
+   ...genrateSecsRoutes(GSSubjectOptions,'GS'),
+   ...genrateSecsRoutes(LHSubjectOptions,'LH'),
+   ...generateUnitRoute(LSSubjectOptions,'LS'),
+   ...generateUnitRoute(ESSubjectOptions,'ES'),
+   ...generateUnitRoute(GSSubjectOptions,'GS'),
+   ...generateUnitRoute(LHSubjectOptions,'LH'),  
+  ...genrateLessonRoute(ESSubjectOptions,'ES'),
+  ...genrateLessonRoute(LSSubjectOptions,'LS'),
+  ...genrateLessonRoute(LHSubjectOptions,'LH'),
+  ...genrateLessonRoute(GSSubjectOptions,'GS'),
+  ...genrateTypesRoute(ESSubjectOptions,'ES'),
+  ...genrateTypesRoute(LSSubjectOptions,'LS'),
+  ...genrateTypesRoute(LHSubjectOptions,'LH'),
+  ...genrateTypesRoute(GSSubjectOptions,'GS')
 ]);  
 console.log(GSSubjectOptions)
 ReactDOM.createRoot(document.getElementById("root")).render( 

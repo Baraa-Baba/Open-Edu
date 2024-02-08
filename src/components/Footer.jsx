@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function Footer() {
-  return (
-    <div>Footer</div>
+  return ( 
+          <footer>Copyright © Hamza El Rachidi & Baraa El Baba FEKRA 2024. All rights reserved. </footer> 
   )
 }

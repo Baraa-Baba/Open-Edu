@@ -8,6 +8,7 @@ import { storage } from '../firebase';
 import '../css/form.css'
 import { GSSubjectOptions,LSSubjectOptions,LHSubjectOptions,ESSubjectOptions,typeApplcation } from '../Subjects/subjects';
 import RequiredWarning from '../components/RequiredWarning';
+import Popup from '../components/Popup';
 export default function Form() {
 
   let secsOptions = [{name: 'GS'},{name: 'LS'},{name: 'ES'},{name: 'LH'}]
@@ -29,7 +30,21 @@ export default function Form() {
   const [isClickedOnSubmit,setisClickedOnSubmit]=useState(false) 
   const [AvialibleUntis,setAvialibleUntis]=useState([])
   const [AvialibleUntisAll,setAvialibleUntisAll]=useState([])
-
+  const [IsUnitFuffled,setIsUnitFuffled]=useState(false)
+  const [IsLessonFuffiled,setIsLessonFuffiled]=useState(false)
+  const [Files,setFiles]=useState([])
+  const [IsSubmited,setIsSubmited]=useState(false)
+  const [isFileUploaded,setisFileUploaded]=useState(0)
+  const [fileLength,setFileLength]=useState(0)
+  function handleApplicationTypes(value){ 
+    alert('d')
+    setTimeout(()=>{
+      setApplicationTypes(value)
+    },1000)
+  }
+  useEffect(()=>{
+console.log(ApplicationTypes)
+  },[ApplicationTypes])
   function handleSecChange(selectedSecs){  
     handleSubjectChange(selectedSubject) 
   const allSections = [{name:'GS',subjects:GSSubjectOptions},{name:'ES',subjects:ESSubjectOptions},{name:'LS',subjects:LSSubjectOptions},{name:'LH',subjects:LHSubjectOptions}]
@@ -65,11 +80,55 @@ export default function Form() {
     setAvialibleUntisAll(avialbleSubjectsAll)
     setAvialibleUntis(convertToOptions(Array.from(avialibleUntis))) 
   }
+  useEffect(()=>{
+    let isUnitFuffled
+    if(!AvialibleUntis[0]?.name){
+      isUnitFuffled=true//there is nothing to fill
+    }else if(SlectedUnits[0]?.name){
+      isUnitFuffled=true 
+    }else{
+      isUnitFuffled=false 
+    }
+    let isLessonFuffled
+    if(!AvliableLessons[0]?.name){
+      isLessonFuffled=true//there is nothing to fill
+    }else if(SelectedLessons[0]?.name){
+      isLessonFuffled=true 
+    }else{
+      isLessonFuffled=false 
+    }
+    setIsUnitFuffled(isUnitFuffled)
+    setIsLessonFuffiled(isLessonFuffled)
+    
+  },[SlectedUnits,SelectedLessons])
 
   function handleFormSubmmsion(){ 
-    if(!document.getElementById('permissionCheck').checked) { 
+    let isUnitFuffled
+    if(!AvialibleUntis[0]?.name){
+      isUnitFuffled=true//there is nothing to fill
+    }else if(SlectedUnits[0]?.name){
+      isUnitFuffled=true 
+    }else{
+      isUnitFuffled=false 
+    }
+    let isLessonFuffled
+    if(!AvliableLessons[0]?.name){
+      isLessonFuffled=true//there is nothing to fill
+    }else if(SelectedLessons[0]?.name){
+      isLessonFuffled=true 
+    }else{
+      isLessonFuffled=false 
+    }
+    setIsUnitFuffled(isUnitFuffled)
+    setIsLessonFuffiled(isLessonFuffled)
+    if(!document.getElementById('permissionCheck').checked){
       setisShowReqried(true)
-      setisClickedOnSubmit(true)
+    }
+    if(!document.getElementById('permissionCheck').checked||!authorsName||!selectedSubject?.name||!slectedSecsOptions[0]?.name||
+     !isUnitFuffled ||!isLessonFuffled||!ApplicationTypes[0]?.name) { 
+      setisClickedOnSubmit(true) 
+      console.log(!authorsName.trim(),ApplicationTypes[0]?.name)
+      alert('returned')
       return
       }
     let formFileElment= document.getElementById('form_file')
@@ -85,6 +144,7 @@ export default function Form() {
         },
       extraTags:{}
     }
+    setFileLength(formFileElment.files.length)
     if(formFileElment.files.length==1){  
 
     uploadFile(formFileElment.files[0],singleFileData.fileID,singleFileData) 
@@ -98,13 +158,14 @@ export default function Form() {
       }
   } 
 }
-  async function handleSingleFileUpload(fileData,fileURL){
+  async function handleSingleFileUpload(fileData,fileURL){ 
     try {   
       let fileDataTMP =fileData
       fileDataTMP.fileURL=fileURL 
       const docRef = await setDoc(doc(db, "fileData",fileDataTMP.fileID), 
       fileDataTMP
-      );    
+      );     
+      setisFileUploaded((prev)=>prev+1)
     } catch (e) {  
       console.error("Error adding document: ", e); 
     }
@@ -118,7 +179,8 @@ export default function Form() {
 } 
 const uploadFile = (file,fileID,singleFileData) => { 
   if (!file) return;  
-  const sotrageRef = ref(storage, `files/${fileID}`);
+  setIsSubmited(true)
+  const sotrageRef = ref(storage, `files/${fileID}/${singleFileData?.fileName}`);
   const uploadTask = uploadBytesResumable(sotrageRef, file); 
    uploadTask.on(
      "state_changed",
@@ -139,6 +201,7 @@ const uploadFile = (file,fileID,singleFileData) => {
    );
 };
     function handleFileInputChange(elment){  
+            setFiles(elment.files)
             const filesNames = elment.parentElement.querySelector("#files-names");
             filesNames.innerHTML=''  
             for (let i = 0; i < elment.files.length; i++) {
@@ -200,14 +263,7 @@ const uploadFile = (file,fileID,singleFileData) => {
       })
       console.log(selectedUnitsData)
       setAvliableLessons(convertToOptions(Array.from(lessons))) 
-    }  
-    useEffect(()=>{
-      let elm =document.querySelector('.singleSelect input')
-      let subj =document.querySelector('.singleSelect .searchWrapper')
-      subj.addEventListener('click',(e)=>{
-        e.preventDefault()
-      }) 
-    })
+    }   
     return (
 
     <div className='formCont'> 
@@ -229,7 +285,7 @@ const uploadFile = (file,fileID,singleFileData) => {
 
     <label htmlFor='sections' className='formLabel'>Sections* {isClickedOnSubmit && 
       <span style={{color:'red'}}> 
-      {(!secsOptions[0]?.name)?'(this field is required)':null}
+      {(!slectedSecsOptions[0]?.name)?'(this field is required)':null}
   </span>
     }  </label>
     <Multiselect showArrow className='mutilSelect' avoidHighlightFirstOption onRemove={(value) => handleSecChange(value)}  onSelect={(value) => handleSecChange(value)} options={secsOptions} placeholder='Sections' displayValue="name" showCheckbox={true} />
@@ -243,39 +299,63 @@ const uploadFile = (file,fileID,singleFileData) => {
      options={AvialbleSubjects} onSelect={(value) => handleSubjectChange(value[0])} onRemove={(value) => handleSubjectChange(value[0])}
         placeholder='Subjects' displayValue="name" closeOnSelect />
 { !selectedSubject ||  AvialibleUntis[0]?.name  ? <>
-    <label htmlFor='units' className='formLabel'>Units</label>
+    <label htmlFor='units' className='formLabel'>Units* 
+    {isClickedOnSubmit &&
+      <span style={{color:'red'}}> 
+      {(!IsUnitFuffled)?'(this field is required)':null}
+  </span>
+    }
+    
+      </label>
    <Multiselect showArrow className='mutilSelect' avoidHighlightFirstOption options={AvialibleUntis} onRemove={(value) => handleUnitChange(value)}
      onSelect={(value) => handleUnitChange(value)} placeholder='Units' displayValue="name" showCheckbox={true} />
      </>
      :null}
 
-   {!SlectedUnits[0]?.name || (AvliableLessons[0]?.name) ?
+   {  !selectedSubject ||  AvialibleUntis[0]?.name && (!SlectedUnits[0]?.name || (AvliableLessons[0]?.name) )?
    <>
-   <label htmlFor='lessons' className='formLabel'>Lessons</label>
+   <label htmlFor='lessons' className='formLabel'>Lessons* 
+   {isClickedOnSubmit &&
+      <span style={{color:'red'}}> 
+      {(!IsLessonFuffiled)?'(this field is required)':null}
+  </span>
+    }
+   </label>
     <Multiselect showArrow onRemove={(value) => setSelectedLessons(value)}  onSelect={(value) => setSelectedLessons(value)}
      className='mutilSelect' avoidHighlightFirstOption options={AvliableLessons} placeholder='Lessons' displayValue="name" showCheckbox={true} />
      </>
      :null
 }
-    <label htmlFor='types' className='formLabel'>Types</label>
-    <Multiselect showArrow onRemove={(value) => setApplicationTypes(value)}  onSelect={(value) => setApplicationTypes(value)}
+    <label htmlFor='types' className='formLabel'>Types*
+    {isClickedOnSubmit &&
+      <span style={{color:'red'}}> 
+      {(!ApplicationTypes[0]?.name)?'(this field is required)':null}
+  </span>
+    }
+    </label>
+    <Multiselect showArrow onRemove={(value) => handleApplicationTypes(value)}  onSelect={(value) => handleApplicationTypes(value)}
      className='mutilSelect' avoidHighlightFirstOption options={typeApplcation}  placeholder='Types' displayValue="name" showCheckbox={true} />
 
-    <p className='formSubTitle'>attach file</p>
+    <p className='formSubTitle'>attach file*
+    {isClickedOnSubmit &&
+      <span style={{color:'red'}}> 
+      {(!Files.length)?'(this field is required)':null}
+  </span>
+    }
+    </p>
 
 
     <div className="">
         <div className="form-floating  mb-4">
-            <input type="file" onChange={(e) => handleFileInputChange(e.target)} id="form_file" multiple="multiple" name="file[]" className="form-control  upload-empty" placeholder="Attach File" required="" data-gtm-form-interact-field-id="0" />
-            <div id="files-names" className="upload-emptynames"></div>
-            <label htmlFor="form_file">Attach file</label>
+            <input accept='.pdf' type="file" onChange={(e) => handleFileInputChange(e.target)} id="form_file" multiple="multiple" name="file[]" className="form-control  upload-empty" placeholder="Attach File" required="" data-gtm-form-interact-field-id="0" />
+            <div id="files-names" className="upload-emptynames"></div> 
         </div>
         <div className='permisiionRequest'>
         </div>
     </div>
-
-    <button className='submitButton' onClick={() => handleFormSubmmsion()}>Submit</button>
-</div>
+{IsSubmited && <Popup isFileUploaded={isFileUploaded} fileLength={fileLength} />}
+{!IsSubmited &&    <button className='submitButton' onClick={() => handleFormSubmmsion()}>Submit</button>
+}</div>
 
   )
 }
