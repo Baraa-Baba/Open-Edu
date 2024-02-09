@@ -34,6 +34,11 @@ console.log(filteredAccFIles);
        return  <AccCard fileData={accFile} /> 
 })}
    <style jsx>{`
+            footer{
+              position:fixed;
+              width:100%;
+              bottom:0
+            }
             #root{
               min-height:100vh
             }
