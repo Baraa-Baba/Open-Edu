@@ -42,13 +42,6 @@ function App() {
         Literature Humanities
         </div>
       </Link>
-          <style jsx>{`
-            footer{
-              position:fixed;
-              width:100%;
-              bottom:0
-            }
-          `}</style>
       </div> 
   )
 }

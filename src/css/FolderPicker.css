@@ -5,8 +5,7 @@
     align-items: center;
     justify-content: center;
     gap: 18px;
-    padding: 20px;
-    height: calc(99vh - 100px);
+    height: calc(100vh - 112px);
   }
    .optionContainer .option{
     text-transform: capitalize;
@@ -31,4 +30,26 @@
    
   .folderCont:hover {
     background-color: #1a49cc;
+  }
+
+  @media (max-height: 865px) {
+    .FolderPickerCont{
+      gap: 10px;
+      font-size: 14px;
+    }
+    
+  }
+
+  @media (max-height: 750px) {
+    .FolderPickerCont{
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+    
+  }
+  @media (max-height: 660px) {
+    .FolderPickerCont{
+      margin-top: 80px;
+      margin-bottom: 80px;
+    }
   }
