@@ -139,7 +139,7 @@ const genrateTypesRoute = (secSubject,sec) => {
     errorElement:<ErrorPage />,
   },
   {
-    path: "/aboutUs",
+    path: "aboutUs/",
     element: <AboutUs /> ,
   }, 
   {
