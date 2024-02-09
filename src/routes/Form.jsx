@@ -37,13 +37,11 @@ export default function Form() {
   const [isFileUploaded,setisFileUploaded]=useState(0)
   const [fileLength,setFileLength]=useState(0)
   function handleApplicationTypes(value){  
-    setTimeout(()=>{
-      alert(value[0]?.name)
+    setTimeout(()=>{ 
       setApplicationTypes(value)
     },1000)
   }
-  useEffect(()=>{
-    alert('cmon craclin')
+  useEffect(()=>{ 
 console.log(ApplicationTypes)
   },[ApplicationTypes])
   function handleSecChange(selectedSecs){  

@@ -1,9 +1,9 @@
 import React from "react";  
 import ReactDOM from "react-dom/client"; 
-import {
-  BrowserRouter as Router,
-  Routes,
+import { 
   Route,
+  Switch,
+  BrowserRouter as Router,
   Link,
 } from "react-router-dom";
 import Navbar from './components/Navbar' 
@@ -21,7 +21,7 @@ import FilePicker from "./components/FilePicker";
 import './index.css'
 import {collection, addDoc, setDoc,doc , getDocs,getDoc } from "firebase/firestore"; 
 import { db } from './firebase'; 
-import Protected from "./components/Protacted";
+import Protected from "./components/Protacted"; 
 let AceppetedFiles=[]
 async function getMarker(){
   const querySnapshot = await getDocs(collection(db, "fileData"));
@@ -204,19 +204,21 @@ const genrateTypesRoute = (secSubject,sec) => {
 ]
 console.log(GSSubjectOptions)
 ReactDOM.createRoot(document.getElementById("root")).render( 
-    <UserAuthContextProvider>  
-      <Router>
+    <UserAuthContextProvider>   
     <Navbar />
-    <Routes>
+    <Router>
+    <Switch>
+
     {routesArr?.map(function (routeSingle, index){
        return   <Route
        exact
-       path={routeSingle?.path}
-       element={routeSingle?.element}
-   ></Route>
+       path={routeSingle?.path} 
+   >
+    {routeSingle?.element}
+   </Route>
 })}
-</Routes>
-    <Footer  /> 
-      </Router> 
+  </Switch>
+</Router>
+    <Footer  />  
     </UserAuthContextProvider> 
 );
