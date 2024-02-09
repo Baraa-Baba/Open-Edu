@@ -13,14 +13,6 @@ export default function FolderCard({subject}) {
          
     </div>
         </Link> 
-        <style jsx>{`
-            footer{
-              position:fixed;
-              width:100%;
-              bottom:0
-            }
-          `}</style>
-      
       </>
   )
 }
