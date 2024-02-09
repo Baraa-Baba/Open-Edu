@@ -1,11 +1,10 @@
 import React from "react";  
 import ReactDOM from "react-dom/client"; 
-import { 
+import {
+  createBrowserRouter,
+  RouterProvider,
   Route,
-  Switch,
-  BrowserRouter as Router,
-  Link,
-} from "react-router-dom";
+} from "react-router-dom"; 
 import Navbar from './components/Navbar' 
 import { UserAuthContextProvider } from "./context/AuthContext";  
 import AboutUs from "./routes/AboutUs";
@@ -21,7 +20,7 @@ import FilePicker from "./components/FilePicker";
 import './index.css'
 import {collection, addDoc, setDoc,doc , getDocs,getDoc } from "firebase/firestore"; 
 import { db } from './firebase'; 
-import Protected from "./components/Protacted"; 
+import Protected from "./components/Protacted";
 let AceppetedFiles=[]
 async function getMarker(){
   const querySnapshot = await getDocs(collection(db, "fileData"));
@@ -132,14 +131,14 @@ const genrateTypesRoute = (secSubject,sec) => {
   );
   return typeRoutes
 };
- let routesArr= [
+const router = createBrowserRouter([
   {
     path: "/",
     element: <App />, 
     errorElement:<ErrorPage />,
   },
   {
-    path: "aboutUs/",
+    path: "about-us/",
     element: <AboutUs /> ,
   }, 
   {
@@ -201,24 +200,12 @@ const genrateTypesRoute = (secSubject,sec) => {
   path:'/*',
   element: <div>reRoute</div> , 
 }
-]
+]);  
 console.log(GSSubjectOptions)
 ReactDOM.createRoot(document.getElementById("root")).render( 
-    <UserAuthContextProvider>   
-    <Navbar />
-    <Router>
-    <Switch>
-
-    {routesArr?.map(function (routeSingle, index){
-       return   <Route
-       exact
-       path={routeSingle?.path} 
-   >
-    {routeSingle?.element}
-   </Route>
-})}
-  </Switch>
-</Router>
-    <Footer  />  
+    <UserAuthContextProvider>  
+      <Navbar />
+    <RouterProvider router={router} /> 
+    <Footer  /> 
     </UserAuthContextProvider> 
 );
