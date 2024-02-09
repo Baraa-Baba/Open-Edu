@@ -1,5 +1,4 @@
-import React,{useEffect} from 'react';
-import { Navigate } from 'react-router-dom';
+import React,{useEffect} from 'react'; 
 import { useUserAuth } from '../context/AuthContext';
 
 const Protected = ({ children }) => {

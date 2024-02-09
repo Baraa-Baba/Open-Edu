@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom"; 
+import { Link } from "react-router-dom"; 
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 
@@ -15,8 +15,7 @@ const AdminSignIn = () => {
   const [isDisabled,setIsDisabled] =useState(false)
   const [otp, setOtp] = useState("");
   const [result, setResult] = useState("");
-  const { setUpRecaptha,user } = useUserAuth();
-  const navigate = useNavigate();
+  const { setUpRecaptha,user } = useUserAuth(); 
   async function storeUser(){
     try { 
       const docRef = await setDoc(doc(db, "users",user?.phoneNumber), {
@@ -55,8 +54,7 @@ const AdminSignIn = () => {
               }); 
             }
               } catch(error) { console.log(error) }
-             
-              navigate("/account"); 
+               alert('meshe el ')
           
           }
           saveChanges()
