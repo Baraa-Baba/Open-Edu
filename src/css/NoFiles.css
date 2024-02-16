@@ -1,0 +1,66 @@
+
+.error {
+    background-color: #ffffff;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    width: 80vw;    
+    height:700px;
+    max-height: 40vh;
+    max-width: 700px;
+}
+.thanks{
+    padding: 10px;
+    text-align: center;
+}
+.thanks h2 {
+    color: #4070F4;
+    font-weight: 900;
+    font-size: 28px;
+    padding: 5px;
+    padding-bottom: 10px;
+}
+.thanks p {
+    padding: 5px;
+    font-size: 18px;
+}
+.thanks p a {
+    text-decoration: none;
+    color: #4070F4;
+    font-weight: bolder;
+}
+.thanks p a:hover {
+    color: #0c486f;
+    transition: 0.3s ease-in-out;
+}
+.othershit {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+} 
+.othershit a {
+    color: #ffffff;
+    text-align: center;
+  }
+  .othershit button { 
+    margin: 0 0 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 50px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    background-color: #4070F4;
+    color: #ffffff;
+    border: none;
+}
+.othershit button:hover{
+    background-color: #0079ca;
+    transition: 0.4s ease-in-out;
+}
+

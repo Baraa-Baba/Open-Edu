@@ -1,0 +1,144 @@
+.formCont {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-top: 20px;
+    padding-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  .checkCont{
+    position:relative
+  }
+  .warningText{
+    color: red;
+  }
+
+.file-block{
+  display: flex;
+  flex-direction:row-reverse;
+}
+#files-names{
+  position: absolute;
+  z-index: 1000000;
+  top: 2rem;
+  margin-top: 10px;
+  left: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12px;
+  gap: 6px;
+}
+.file-delete{
+  color: red;
+  transform: scale(1.4);
+  margin-left: 10px;
+  cursor: pointer;
+}
+.form-floating{ 
+  position: relative; 
+}
+.file-block{
+  color: black;
+  background-color:#959ca9 ;
+  padding: 8px 10px;
+  border-radius: 4px;
+}
+  #permissionCheck{
+    width: 20px;
+    position: absolute;
+    bottom: 3px;
+    height: 20px;
+    cursor: pointer; 
+  }
+  .formInput {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+  
+#form_file{
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: white;
+  box-sizing: border-box;
+  cursor: pointer;
+  height: 100px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.7;
+  color: black !important;
+  -webkit-appearance: none;
+  border: 1px solid #ccc;
+    border-radius: 4px;
+  -moz-appearance: none;
+  appearance: none;  
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.file-delete:hover div{
+  color: red !important;
+}
+.optionListContainer{
+  z-index: 100000000 !important;
+}
+#form_file::placeholder{
+display: none;
+}
+  .permissionText {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  .singleSelect{
+    height: 45px;
+    padding-right: 0 !important;
+  }
+  .singleSelect > input{
+    z-index: 0 !important;
+    position: absolute !important
+  }
+  .singleSelect .singleChip{
+    background: #0096fb;
+    color: white;
+    font-size: 16px;
+  }
+  .singleSelect .singleChip .closeIcon{
+    display: none;
+  }
+  .mutilSelect {
+    width: 100%;
+    margin-bottom: 10px;
+    cursor: pointer;
+
+    background-color: white;
+  }
+  .mutilSelect input{ 
+    padding:4px 10px ;
+    border: unset;
+}
+.upload-empty {
+ 
+}
+  .formSubTitle{
+    font-size: 22px;
+    margin-block: 4px;
+  }
+  input[placeholder='Subjects']{
+    cursor: pointer;
+  }
+  .submitButton {
+    background-color: #4070F4;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    width: 100%;
+    border-radius: 12px;
+    cursor: pointer;
+
+  }
+  
+  .submitButton:hover {
+    background-color: #0079ca;
+  }

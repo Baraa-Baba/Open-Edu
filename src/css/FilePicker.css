@@ -1,0 +1,45 @@
+.filesCont{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 112px);
+}
+.fileContainerAcc{
+    width: 400px;
+}
+.fileContainerAcc iframe{
+    width: 100%;
+    object-fit: contain;
+    overflow: hidden;
+}
+.fileContainerAcc iframe img{
+    width: 100%;
+    display: none;
+    object-fit: contain;
+    overflow: hidden;
+}
+
+@media (max-height: 865px) {
+    .filesCont{
+      gap: 10px;
+      font-size: 14px;
+    }
+    
+  }
+
+  @media (max-height: 750px) {
+    .filesCont{
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+    
+  }
+  @media (max-height: 660px) {
+    .filesCont{
+      margin-top: 80px;
+      margin-bottom: 80px;
+    }
+  }
