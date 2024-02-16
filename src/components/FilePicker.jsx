@@ -11,7 +11,7 @@ export default function FilePicker({accFiles}) {
   useEffect(()=>{
     console.log(location)
     const stringWithSpaces = location?.pathname.replace(/%20/g, ' ');
-    console.log(stringWithSpaces)
+    console.log('stringWithSpaces')
     const pathArray = stringWithSpaces.split('/').filter(Boolean); 
 
     let pathArrayLower = pathArray.map(element => element.toLowerCase());
