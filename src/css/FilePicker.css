@@ -5,7 +5,7 @@
     width: 100%;
     align-items: center;
     justify-content: center;
-    height: calc(100vh - 112px);
+    height: calc(100vh - 200px);
 }
 .fileContainerAcc{
     width: 400px;

@@ -139,9 +139,9 @@ footer{
     color: var(--search-bar);
     background: var(--nav-color);
     text-align: center;
-    font-size: 15px;
-    position: sticky;
+    font-size: 15px; 
     bottom: 0;
+    position: fixed;
     width: 100%;
 }
 .list-container{

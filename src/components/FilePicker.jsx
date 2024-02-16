@@ -27,24 +27,23 @@ export default function FilePicker({accFiles}) {
         let isAcepted = isSubset(allTagsLower,pathArrayLower); 
         return isAcepted
     })
+    console.log(filteredAccFIles)
     setaccFiles(filteredAccFIles)
 console.log(filteredAccFIles); 
   },[location]) 
+  useEffect(()=>{
+    console.log(acceptedFiles)
+  },[acceptedFiles])
   return (
     <>
     <Navbar />
     <div className='filesCont'>
-         {acceptedFiles[0]?.accFile?.fileName  ? acceptedFiles?.map(function (accFile, index){
+         {acceptedFiles[0]?.fileName  ? acceptedFiles?.map(function (accFile, index){
        return  <AccCard fileData={accFile} /> 
 
  })
  :<NoFiles />
-}
-   <style jsx>{`
-            .filesCont{
-              min-height:90vh
-            }
-          `}</style>
+} 
     </div>
     <Footer />
     </>
