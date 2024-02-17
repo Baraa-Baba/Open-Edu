@@ -141,7 +141,7 @@ footer{
     text-align: center;
     font-size: 15px; 
     bottom: 0;
-    position: fixed;
+    position: sticky;
     width: 100%;
 }
 .list-container{

@@ -9,6 +9,7 @@ export default function FilePicker({accFiles}) {
   const location = useLocation();
   const [acceptedFiles,setaccFiles]=useState([])
   useEffect(()=>{
+    console.log(accFiles)
     console.log(location)
     const stringWithSpaces = location?.pathname.replace(/%20/g, ' ');
     console.log('stringWithSpaces')

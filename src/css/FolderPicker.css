@@ -5,7 +5,7 @@
     align-items: center;
     justify-content: center;
     gap: 18px;
-    height: calc(100vh - 200px);
+    min-height: calc(100vh - 112px);
   }
    .optionContainer .option{
     text-transform: capitalize;

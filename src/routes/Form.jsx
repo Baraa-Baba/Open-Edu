@@ -47,28 +47,39 @@ export default function Form() {
   useEffect(()=>{ 
 console.log(ApplicationTypes)
   },[ApplicationTypes])
+
+  function countOccurrences(arr, target) {
+    return arr.reduce((count, element) => {
+      return element === target ? count + 1 : count;
+    }, 0);
+  }
   function handleSecChange(selectedSecs){  
     handleSubjectChange(selectedSubject) 
   const allSections = [{name:'GS',subjects:GSSubjectOptions},{name:'ES',subjects:ESSubjectOptions},{name:'LS',subjects:LSSubjectOptions},{name:'LH',subjects:LHSubjectOptions}]
     let secsArray = Object.values(selectedSecs).map(obj => obj.name) 
     let matchingSections = allSections.filter(subject => secsArray.includes(subject.name)); 
-    let avialbleSubjects= new Set();
+    let avialbleSubjects=  [];
 
     matchingSections.forEach((sections)=>{ 
       sections?.subjects?.forEach((subject)=>{
-        avialbleSubjects.add(subject?.name)
+        avialbleSubjects.push(subject?.name)
       })
-    }) 
-    let arravialbleSubjects=Array.from(avialbleSubjects)  
-    setAvialbleSubjects(convertToOptions(arravialbleSubjects))
+    })  
+    console.log(avialbleSubjects) 
+    console.log(countOccurrences(avialbleSubjects,avialbleSubjects[0]))
+    let filteredarravialbleSubjects = avialbleSubjects.filter((subj)=>countOccurrences(avialbleSubjects , subj) == secsArray.length)
+    
+    console.log(filteredarravialbleSubjects)
+    let arravialbleSubjects=Array.from(new Set(filteredarravialbleSubjects))  
+    setAvialbleSubjects(convertToOptions(Array.from(arravialbleSubjects)))
     setMatchingSections(matchingSections)  
     setslectedSecsOptions(selectedSecs)
   }
+  
   function handleSubjectChange(slectedSubject){ 
     setselectedSubject(slectedSubject) 
     let avialibleUntis = new Set() 
     let avialbleSubjectsAll= [];
-
     MatchingSections.forEach((section)=>{
       section?.subjects?.forEach((subject)=>{  
         if(subject?.name.toLowerCase()===slectedSubject?.name?.toLowerCase()){  
