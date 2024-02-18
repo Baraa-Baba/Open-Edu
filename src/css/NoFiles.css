@@ -5,7 +5,8 @@
     align-items: center;
     justify-content: center;
     border-radius: 12px;
-    width: 80vw;    
+    width: 500px;
+    max-width: 80vw;    
     height:700px;
     max-height: 30vh;
     max-width: 700px;
