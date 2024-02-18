@@ -5,14 +5,47 @@ import { useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar' 
 import NoFiles from '../components/NoFiles'
 import Footer from "../components/Footer"; 
-export default function FilePicker({accFiles}) {
+export default function FilePicker({accFiles,isExam}) {
   const location = useLocation();
-  const [acceptedFiles,setaccFiles]=useState([])
+  const [notRuned,setnotRuned] =useState(true)
+  const [acceptedFiles,setaccFiles]=useState([]) 
   useEffect(()=>{
     console.log(accFiles)
-    console.log(location)
-    const stringWithSpaces = location?.pathname.replace(/%20/g, ' ');
-    console.log('stringWithSpaces')
+  },[accFiles])
+  function init(){
+    setnotRuned(false)
+    if(isExam){ 
+      function checkIfExam(){ 
+          accFiles.forEach((file)=>{ 
+            if(file?.folderTags?.units?.length !== 1){ 
+            }else{
+              let index = file?.folderTags?.ApplicationTypes?.indexOf('exams');
+              if (index !== -1) {
+                file?.folderTags?.ApplicationTypes?.splice(index, 1);
+              } 
+            }
+          }) 
+      }
+      checkIfExam()
+      const stringWithSpaces = location?.pathname.replace(/%20/g, ' '); 
+      const pathArray = stringWithSpaces.split('/').filter(Boolean); 
+  
+      let pathArrayLower = pathArray.map(element => element.toLowerCase());
+  
+      let filteredAccFIles = accFiles?.filter((accFile)=>{  
+        let allTags = [...accFile?.folderTags?.secs,...accFile?.folderTags?.units,...accFile?.folderTags?.lessons
+          ,...accFile?.folderTags?.ApplicationTypes,accFile?.folderTags?.subject]
+          let allTagsLower = allTags.map(element => element.toLowerCase());
+  
+          const isSubset = (array1, array2) =>
+    array2.every((element) => array1.includes(element.toLowerCase()));
+    console.log(pathArrayLower,allTagsLower)
+          let isAcepted = isSubset(allTagsLower,pathArrayLower); 
+          return isAcepted
+      }) 
+      setaccFiles(filteredAccFIles) 
+    }else{ 
+    const stringWithSpaces = location?.pathname.replace(/%20/g, ' '); 
     const pathArray = stringWithSpaces.split('/').filter(Boolean); 
 
     let pathArrayLower = pathArray.map(element => element.toLowerCase());
@@ -27,20 +60,27 @@ export default function FilePicker({accFiles}) {
   console.log(pathArrayLower,allTagsLower)
         let isAcepted = isSubset(allTagsLower,pathArrayLower); 
         return isAcepted
-    })
-    console.log(filteredAccFIles)
-    setaccFiles(filteredAccFIles)
-console.log(filteredAccFIles); 
-  },[location]) 
+    }) 
+    setaccFiles(filteredAccFIles) 
+  }
+  }
   useEffect(()=>{
-    console.log(acceptedFiles)
-  },[acceptedFiles])
+    init()
+  },[location,accFiles?.length]) 
+  useEffect(()=>{ 
+    if(notRuned&&acceptedFiles[0]?.fileName){ 
+        init() 
+    }
+  },[acceptedFiles,notRuned])
+  useEffect(()=>{
+
+  },[])
   return (
     <>
     <Navbar />
     <div className='filesCont'>
          {acceptedFiles[0]?.fileName  ? acceptedFiles?.map(function (accFile, index){
-       return  <AccCard fileData={accFile} /> 
+       return  <AccCard fileData={accFile}  /> 
 
  })
  :<NoFiles />

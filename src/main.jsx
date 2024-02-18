@@ -39,12 +39,12 @@ function genrateSecsRoutes(secsSubject,sec){
     if(subject?.units){
     return { 
        path: `/${sec}/${subject.name}`,
-       element: <FolderPicker subjects={subject.units} /> ,
+       element: <FolderPicker subjects={[...subject.units,{name:'exams',type:'exams'}]} /> ,
      }
     }else{
       return { 
          path: `/${sec}/${subject.name}`,
-         element: <FolderPicker subjects={Object.values(typeApplcation).map(obj => obj.name)} /> ,
+         element: <FolderPicker subjects={[...Object.values(typeApplcation).map(obj => obj.name),{name:'exams',type:'exams'} ]} /> ,
        }
     }
    })
@@ -54,6 +54,7 @@ const generateUnitRoute = (secsSubject,sec) => {
   console.log(sec)
   console.log(secsSubject)
   return secsSubject.flatMap((subject) => {
+    
     return (
       subject?.units?.map((unit) => {  
         if(unit?.lessons){
@@ -71,8 +72,17 @@ const generateUnitRoute = (secsSubject,sec) => {
       }
       }) || []
     );
+    
   });
 };
+const genrateExamRoutes = (secsSubject,sec) => {
+  return secsSubject.map((subject) => {
+    return {
+      path: `/${sec}/${subject.name}/exams`,
+      element: <FilePicker isExam={true} accFiles={AceppetedFiles} />, 
+    }; 
+  });
+}
 const genrateLessonRoute = (secsOptions,sec) => {
   let lessonsRoutes=[]
   secsOptions.flatMap((subject) => {
@@ -173,8 +183,11 @@ const router = createBrowserRouter([
   {
     path: "/GS",
     element: <FolderPicker subjects={GSSubjectOptions} /> ,
-  },  
-
+  },   
+...genrateExamRoutes(LSSubjectOptions,'LS'),
+...genrateExamRoutes(ESSubjectOptions,'ES'),
+...genrateExamRoutes(GSSubjectOptions,'GS'),
+...genrateExamRoutes(LHSubjectOptions,'LH'),
    ...genrateSecsRoutes(LSSubjectOptions,'LS'),
    ...genrateSecsRoutes(ESSubjectOptions,'ES'),
    ...genrateSecsRoutes(GSSubjectOptions,'GS'),
