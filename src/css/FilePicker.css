@@ -1,11 +1,11 @@
 .filesCont{
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
     width: 100%;
     align-items: center;
     justify-content: center;
-    height: calc(100vh - 200px);
+    min-height: calc(100vh - 112px);
+    height: fit-content;
 }
 .fileContainerAcc{
     width: 400px;
