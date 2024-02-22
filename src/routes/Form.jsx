@@ -348,7 +348,7 @@ const uploadFile = (file,fileID,singleFileData,fileName) => {
     }
     </label>
     <Multiselect showArrow onRemove={(value) => handleApplicationTypes(value)}  onSelect={(value) => handleApplicationTypes(value)}
-     className='mutilSelect' avoidHighlightFirstOption options={typeApplcation}  placeholder='Types' displayValue="name" showCheckbox={true} />
+     className='mutilSelect' avoidHighlightFirstOption options={[...typeApplcation,{name:'books'}]}  placeholder='Types' displayValue="name" showCheckbox={true} />
 
     <p className='formSubTitle'>Attach file*
     {isClickedOnSubmit &&

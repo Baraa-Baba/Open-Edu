@@ -1,5 +1,6 @@
 import React, { useState ,useEffect} from 'react'
 import AccCard from './AccCard'
+import ReRoute from './ReRoute.jsx'
 import '../css/FilePicker.css'
 import { useLocation } from 'react-router-dom'; 
 import Navbar from '../components/Navbar' 
@@ -8,7 +9,9 @@ import Footer from "../components/Footer";
 export default function FilePicker({accFiles,isExam}) {
   const location = useLocation();
   const [notRuned,setnotRuned] =useState(true)
+  const [reRoute,setReRoute]=useState(false)
   const [acceptedFiles,setaccFiles]=useState([]) 
+  const [PathRoute,setPathRoute]=useState('')
   useEffect(()=>{
     console.log(accFiles)
   },[accFiles])
@@ -43,6 +46,7 @@ export default function FilePicker({accFiles,isExam}) {
           let isAcepted = isSubset(allTagsLower,pathArrayLower); 
           return isAcepted
       }) 
+      setPathRoute(pathArrayLower[pathArrayLower.length-1])
       setaccFiles(filteredAccFIles) 
     }else{ 
     const stringWithSpaces = location?.pathname.replace(/%20/g, ' '); 
@@ -73,8 +77,8 @@ export default function FilePicker({accFiles,isExam}) {
     }
   },[acceptedFiles,notRuned])
   useEffect(()=>{
-
-  },[])
+  
+  },[acceptedFiles])
   return (
     <>
     <Navbar />
@@ -84,7 +88,7 @@ export default function FilePicker({accFiles,isExam}) {
 
  })
  :<NoFiles />
-} 
+}  
     </div>
     <Footer />
     </>

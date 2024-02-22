@@ -39,12 +39,12 @@ function genrateSecsRoutes(secsSubject,sec){
     if(subject?.units){
     return { 
        path: `/${sec}/${subject.name}`,
-       element: <FolderPicker subjects={[...subject.units,{name:'exams',type:'exams'}]} /> ,
+       element: <FolderPicker subjects={[...subject.units,{name:'exams',type:'exams'},{name:'books',type:'books'}]} /> ,
      }
     }else{
       return { 
          path: `/${sec}/${subject.name}`,
-         element: <FolderPicker subjects={[...Object.values(typeApplcation).map(obj => obj.name),{name:'exams',type:'exams'} ]} /> ,
+         element: <FolderPicker subjects={[...Object.values(typeApplcation).map(obj => obj.name),{name:'exams',type:'exams'},{name:'books',type:'books'} ]} /> ,
        }
     }
    })
@@ -75,10 +75,10 @@ const generateUnitRoute = (secsSubject,sec) => {
     
   });
 };
-const genrateExamRoutes = (secsSubject,sec) => {
+const genrateNonTypeRoutes = (secsSubject,sec,name) => {
   return secsSubject.map((subject) => {
     return {
-      path: `/${sec}/${subject.name}/exams`,
+      path: `/${sec}/${subject.name}/${name}`,
       element: <FilePicker isExam={true} accFiles={AceppetedFiles} />, 
     }; 
   });
@@ -184,10 +184,14 @@ const router = createBrowserRouter([
     path: "/GS",
     element: <FolderPicker subjects={GSSubjectOptions} /> ,
   },   
-...genrateExamRoutes(LSSubjectOptions,'LS'),
-...genrateExamRoutes(ESSubjectOptions,'ES'),
-...genrateExamRoutes(GSSubjectOptions,'GS'),
-...genrateExamRoutes(LHSubjectOptions,'LH'),
+...genrateNonTypeRoutes(LSSubjectOptions,'LS','exams'),
+...genrateNonTypeRoutes(ESSubjectOptions,'ES','exams'),
+...genrateNonTypeRoutes(GSSubjectOptions,'GS','exams'),
+...genrateNonTypeRoutes(LHSubjectOptions,'LH','exams'),
+...genrateNonTypeRoutes(LSSubjectOptions,'LS','books'),
+...genrateNonTypeRoutes(ESSubjectOptions,'ES','books'),
+...genrateNonTypeRoutes(GSSubjectOptions,'GS','books'),
+...genrateNonTypeRoutes(LHSubjectOptions,'LH','books'),
    ...genrateSecsRoutes(LSSubjectOptions,'LS'),
    ...genrateSecsRoutes(ESSubjectOptions,'ES'),
    ...genrateSecsRoutes(GSSubjectOptions,'GS'),

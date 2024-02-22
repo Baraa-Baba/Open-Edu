@@ -10,16 +10,16 @@ export default function NoFiles() {
             <p>You can fix that by <Link to = "/form">contributing!</Link></p>
         </div>
         <div class = "othershit">
-            <button>
             <Link to = "/form">
-                Contribute
-                </Link>
-                </button>
             <button>
-            <Link to = "/">
-                Learn
+                Contribute
+                </button>
                 </Link>
+            <Link to = "/">
+            <button>
+                Learn
             </button>
+                </Link>
         </div>
     </div>
     </div>

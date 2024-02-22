@@ -5,11 +5,10 @@
     align-items: center;
     justify-content: center;
     border-radius: 12px;
-    width: 500px;
+    width: 400px;
     max-width: 80vw;    
     height:700px;
-    max-height: 30vh;
-    max-width: 700px;
+    max-height: 30vh; 
 }
 .thanks{
     padding: 10px;

@@ -166,6 +166,6 @@ export const GSSubjectOptions = [
         civics, geography, history
         ]
         
-export const typeApplcation = [{ name: 'explantion' }, { name: 'extra' }, { name: 'summary' }, { name: 'exams' }]
+export const typeApplcation = [{ name: 'explantion' }, { name: 'extra' }, { name: 'exams' }]
 
 // bdi il Exams (final midyear) ykoono place seperate la kol subject mish la kol lesson
