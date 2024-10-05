@@ -15,7 +15,6 @@
   }
   .PopupCont > div {
     background: white;
-    display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
@@ -24,6 +23,7 @@
     min-height: 55vh;
     max-width: 80%;
     border-radius: 5px;
+    display: flex;
   }
   *{
       margin: 0;
