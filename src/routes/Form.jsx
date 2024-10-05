@@ -305,11 +305,6 @@ const uploadFile = (file,fileID,singleFileData,fileName) => {
        <a href="#"><p className='permissionText'>I have permission from the author/s</p></a> 
         <input onChange={(e)=>e.target.value && setisShowReqried(false)} type="checkbox" name="" required id="permissionCheck" />  {isShowReqried && <span className='warningText'>you have to have permission from the author</span>}
     </div>
-    <div className='checkCont'>
-       <a target='__blank' href="https://chat.whatsapp.com/IAc5NFSltVB9Pqu3i2ljkj"><p className='permissionText link'>I am in Fekra 11 and 12 group</p></a> 
-        <input onChange={(e)=>e.target.value && setisShowReqried2(false)} type="checkbox" name="" required id="groupcheck" />  {isShowReqried2 && <span className='warningText'>you have to be in Fekra 11 and 12 Group</span>}
-    </div>
-
     <p className='formSubTitle'>File tags</p>
 
     <label htmlFor='sections' className='formLabel'>Sections* {isClickedOnSubmit && 

@@ -26,7 +26,7 @@ export default function AboutUs() {
             <h2>Collaboration:</h2>
         </div>
         <div class="container-body">
-            <p><span class="first-letter">A</span>t FEKRA we highly values student collaboration.
+            <p><span class="first-letter">A</span>t <b>Open-edu</b> we highly values student collaboration.
                As such, this application is based on collaboration.
                Students can share teaching materials using the <a href="/form">contribute</a> button.
             </p>
