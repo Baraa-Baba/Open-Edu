@@ -5,8 +5,9 @@ export default function AboutUs() {
   return ( 
       
     <main>
-      <Navbar />  
-    <h1 class = "title">FEKRA Open Learning</h1>
+      <Navbar /> 
+    <div class = "about-page">
+    <h1 class = "title">Open Education</h1>
     <div class = "info">
         <div class="logo">
             <img src="/logo.png" class="logo-img" />
@@ -76,6 +77,7 @@ export default function AboutUs() {
         </div>
     </div>
     <h1 class = "instructions"><em>Thank you!</em></h1>
+    </div>
     <Footer />
 </main>
   )
