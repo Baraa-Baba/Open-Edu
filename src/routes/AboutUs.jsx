@@ -16,8 +16,8 @@ export default function AboutUs() {
             <p class = "product-info">
                 <span class="first-letter">W</span>ith our mission in mind, we are proud to launch this unique application.
                 This application uniqness comes into play with its collaborative nature:
-                students share teaching materials to help each other- who might not have
-                access to quality teaching resources.
+                students share learning materials to help each other- who might not have
+                access to quality learning resources.
             </p>
         </div>
     </div>
